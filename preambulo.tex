@@ -1,0 +1,50 @@
+
+%-----------------------------------------------------------------------------------------------------------------------------------------
+%------------------------------------------------------------Coisas essenciais------------------------------------------------------------
+%-----------------------------------------------------------------------------------------------------------------------------------------
+
+%\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{fontspec}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{background}
+\usepackage{wallpaper}
+\usepackage{everypage}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{lipsum}
+
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single
+}
+
+% Fonte
+\setmainfont[BoldFont = {SourceSansPro-Bold.ttf}]{SourceSansPro-Light.ttf}
+
+% Background das páginas
+\backgroundsetup{scale=1,angle=0,opacity=1,contents={\includegraphics[width=\paperwidth,height=\paperheight]{../Imagens/FundoPagina.png}}}
+
+% Títulos personalizados
+\titleformat{\section}[block]{\Large\bfseries\color{azulgepc}}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\large\bfseries\color{vermelhogepc}}{\thesubsection}{1em}{}
+
+% Cores
+\definecolor{azulgepc}{RGB}{7,36,60}
+\definecolor{vermelhogepc}{RGB}{235,22,52}

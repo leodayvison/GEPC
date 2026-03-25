@@ -1,0 +1,158 @@
+\documentclass[12pt]{article}
+\input{preambulo}
+
+
+
+\begin{document}
+
+% Capa
+\newpage
+\NoBgThispage
+\ThisCenterWallPaper{1}{Imagens/CapaGEPC.png}
+\thispagestyle{empty}
+\pagecolor{azulgepc}
+\vspace*{\fill}
+
+{\begin{figure}[h!]
+\centering\includegraphics[width=0.3\textwidth]{Imagens/gepc.png}
+\end{figure}
+\vspace{1mm}
+\centering\large\textbf{\color{vermelhogepc}{Grupo de Estudos em Programação Competitiva}}\par
+
+\centering\Huge\textbf{\color{white}{MATERIAL TEÓRICO: INTRODUÇÃO}}\par
+
+}
+
+\vfill
+{
+\centering\Large\textbf{\color{vermelhogepc}{REALIZAÇÃO:}\\
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Imagens/petengcomp.png}
+    \end{minipage}
+    \hspace{3cm} % Adds horizontal space between minipages
+    \begin{minipage}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Imagens/petcomp.png}
+    \end{minipage}
+\end{figure}
+}
+}
+\newpage
+
+
+%============================================================================================================================================
+
+% INÍCIO DO MATERIAL
+\section{Programação Competitiva}
+
+Seja muito bem-vindo ao GEPC! Você está prestes a adentrar em uma longa e árdua jornada, mas que será muito recompensadora. A programação competitiva envolve muitas horas de estudo sobre lógica e resolução de problemas, e iremos auxiliar você durante todo o processo. Sem mais delongas, vamos introduzi-lo(a) às competições mais famosas do Brasil.
+
+\subsection{Olimpíada Brasileira de Informática (OBI)}
+A OBI é a maior competição individual do gênero no Brasil. Ela se divide em Iniciação (lógica teórica) e Programação (onde o código entra em cena), com níveis que seguem sua trajetória acadêmica, como \textbf{Nível Júnior}, para alunos de Ensino Fundamental, \textbf{Níveis 1 e 2} para Ensino Médio, e \textbf{Nível Sênior}, para estudantes do primeiro ano de graduação. Os melhores de cada nível são convidados para cursos na UNICAMP e os mais jovens podem chegar à Olimpíada Internacional (IOI)
+
+\subsection{Maratona SBC de Programação}
+A Maratona da Sociedade Brasileira de Computação (SBC) é a etapa regional do ICPC (International Collegiate Programming Contest). Aqui, o trabalho é em equipe: três pessoas, um computador e muitos balões (cada problema resolvido rende um balão colorido). É um ambiente de alta pressão, muita cafeína e uma satisfação indescritível ao ver o veredito "Accepted" brilhar na tela.
+
+\section{Introdução à Programação}
+Programar é, essencialmente, dar ordens detalhadas a um processador que não possui bom senso. Ele fará exatamente o que você pedir, mesmo que o que você pediu seja uma estupidez que trave o sistema.
+
+\subsection{Linguagens de Programação}
+Computadores operam apenas com pulsos elétricos (zeros e uns). Como não somos máquinas, usamos as linguagens de programação como uma ponte: elas são um conjunto de regras e palavras que nos permitem descrever passos lógicos de forma humana. Um software chamado compilador lê o que escrevemos e traduz para a linguagem que o hardware entende.\\
+No nosso caso, utilizaremos o C++. Ela é a linguagem padrão nas competições por ser extremamente rápida e oferecer a STL (Standard Template Library), uma coleção de ferramentas prontas que evitam que você precise reinventar a roda durante uma prova.
+
+\subsection{IDEs}
+A IDE é o ambiente por meio do qual iremos construir nosso código. A diferença entre uma IDE e um editor de texto simples é que a IDE possui ferramentas para auxílio no desenvolvimento e no teste de código. Recomendamos o VS Code ou o Code::Blocks. Lembre-se: em uma competição real, você não terá acesso a extensões luxuosas de preenchimento automático, então tente não se tornar dependente delas.
+
+\section{Primeiros códigos}
+
+\subsection{A função main()}
+Todo programa em C++ começa por um lugar específico: a função main. Pense nela como o portão de entrada. O computador ignora tudo o que está fora dela até que ela seja chamada.
+
+\begin{lstlisting}[language=C++]
+int main() {
+    // Seu código começa aqui
+    return 0; 
+}
+\end{lstlisting}
+
+\textbf{OBS$_1$}: O return 0; ao final indica ao sistema operacional que o programa terminou com sucesso. Se ele retornar qualquer outra coisa, o sistema pode achar que algo deu terrivelmente errado (o que, sejamos honestos, acontecerá bastante no início).\\
+\textbf{OBS$_2$}: A linha que contém "//" no início é uma linha de \textbf{Comentário}. Comentários são partes do código que são ignoradas pelo computador, servindo apenas para melhor compreensão do programador.
+
+
+
+\section{Variáveis}
+O computador possui memória, e as variáveis são nomes que damos a pequenos espaços nessa memória para guardar informações. Em C++, precisamos dizer ao computador exatamente o tipo de dado que vamos guardar.\\
+os tipos básicos de variáveis são:
+\begin{enumerate}
+    \item \textbf{int}: Números inteiros (ex: 10, -500, 42).
+    \item \textbf{double}: Números com casas decimais (ex: 3.1415, 0.001).
+    \item \textbf{char}: Um único caractere (ex: 'A', 'b', '@').
+    \item \textbf{string}: Um conjunto de caracteres, ou seja, texto.
+    \item \textbf{bool}: Valores lógicos: true (verdadeiro) ou false (falso).
+\end{enumerate}
+
+Segue um exemplo de declaração de variáveis:
+ \\
+\begin{lstlisting}[language=C++]
+int main() {
+    int idade = 18;
+    double preco = 12.50;
+    char inicial = 'G';
+    return 0; 
+}
+\end{lstlisting}
+
+\section{Entrada e Saída de Dados}
+Um programa competitivo geralmente lê dados de um arquivo ou do teclado (\textbf{entrada}) e exibe o resultado na tela (\textbf{saída}). No C++, usamos os objetos cin e cout (dentro da biblioteca iostream).
+
+\begin{enumerate}
+    \item \textbf{cin >>}: Pega o que o usuário digitou e guarda em uma variável.
+    \item \textbf{cout <<}: Exibe o conteúdo de uma variável ou um texto na tela.
+    \item \textbf{endl} ou \textbf{\text{\textbackslash n}}: Servem para pular uma linha. 
+\end{enumerate}
+
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x;
+    cin >> x; // Lê um número
+    cout << "O valor digitado foi: " << x << "\n"; // Mostra o número
+    return 0; 
+}
+\end{lstlisting}
+
+\section{Bibliotecas}
+Bibliotecas são arquivos que contêm funções prontas. Se quisermos usar o cin e o cout, precisamos avisar ao compilador que usaremos a biblioteca de entrada e saída.\\
+A linha \#include <iostream> no topo do código faz exatamente isso.\\
+Outros exemplos de bibliotecas são a \textbf{cmath}, que oferece funções matemáticas como raiz quadrada (sqrt) e potências (pow), \textbf{algorithm}, que contém funções poderosas como o sort (que ordena uma lista de números instantaneamente), além das bibliotecas que implementam as chamadas \textbf{Estruturas de Dados}, que iremos aprender posteriormente. \\
+\textbf{Nota sobre using namespace std;:} Você verá frequentemente essa linha nos códigos. Ela serve para não precisarmos escrever std::cin ou std::cout toda vez. É um atalho preguiçoso, mas aceitável no contexto de competição.
+
+\section{Um código de exemplo}
+Juntando tudo o que vimos, aqui está a estrutura de um programa que lê dois números e imprime a soma deles:
+
+\begin{lstlisting}[language=C++]
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    // Declaração das variáveis
+    int a, b;
+
+    // Entrada de dados
+    cin >> a >> b;
+    
+    // Cálculo e Saída
+    int soma = a + b;
+    cout << soma << "\n";
+
+    return 0;
+}
+\end{lstlisting}
+
+\end{document}

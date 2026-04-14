@@ -1,0 +1,291 @@
+\documentclass[12pt]{article}
+\input{../preambulo}
+
+
+
+\begin{document}
+
+% Capa
+\newpage
+\NoBgThispage
+\ThisCenterWallPaper{1}{../Imagens/CapaGEPC.png}
+\thispagestyle{empty}
+\pagecolor{azulgepc}
+\vspace*{\fill}
+
+{\begin{figure}[h!]
+\centering\includegraphics[width=0.3\textwidth]{../Imagens/gepc.png}
+\end{figure}
+\vspace{1mm}
+\centering\large\textbf{\color{vermelhogepc}{Grupo de Estudos em Programação Competitiva}}\par
+
+\centering\Huge\textbf{\color{white}{MATERIAL TEÓRICO: \\PROBLEMAS DE ORDENAÇÃO}}\par
+
+}
+
+\vfill
+{
+\centering\Large\textbf{\color{vermelhogepc}{REALIZAÇÃO:}\\
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../Imagens/petengcomp.png}
+    \end{minipage}
+    \hspace{3cm} % Adds horizontal space between minipages
+    \begin{minipage}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../Imagens/petcomp.png}
+    \end{minipage}
+\end{figure}
+}
+}
+\newpage
+\tableofcontents
+\newpage
+
+
+
+%============================================================================================================================================
+
+% INÍCIO DO MATERIAL
+%============================================================================================================================================
+
+\section{Introdução ao Capítulo}
+Agora que dominamos os fundamentos da programação, é hora de dar um passo adiante e começar a pensar como um programador competitivo de verdade. Neste capítulo, vamos explorar um dos problemas mais clássicos da computação: \textbf{ordenação}. Mais do que simplesmente aprender a colocar elementos em ordem, vamos entender \textbf{por que} alguns algoritmos são melhores que outros, e como essa diferença pode ser decisiva dentro de uma competição.
+
+%============================================================================================================================================
+
+\section{Motivação: Por que Ordenar?}
+
+Imagine que você recebe uma lista com um milhão de nomes e precisa encontrar um específico. Se a lista estiver em ordem aleatória, você pode ter que percorrê-la inteira até encontrar o nome — ou confirmar que ele não está lá. Agora, se a lista estiver em ordem alfabética, você pode usar estratégias muito mais eficientes, como abrir na metade e decidir em qual metade continuar a busca.
+
+Esse é apenas um dos inúmeros contextos em que a ordenação aparece como etapa fundamental. Na prática, boa parte dos algoritmos eficientes para outros problemas — como busca, contagem de inversões, problemas de geometria computacional, entre outros — assume que os dados de entrada estão ordenados. Dominar algoritmos de ordenação, portanto, não é apenas um exercício acadêmico: é uma ferramenta essencial no repertório de qualquer programador competitivo.
+
+%============================================================================================================================================
+
+\section{Algoritmos Básicos de Ordenação}
+
+Antes de chegarmos aos algoritmos mais eficientes, vamos entender os mais simples. Eles são importantes não só didaticamente, mas também para desenvolvermos a intuição sobre o que significa \textbf{ordenar} e quais operações estão envolvidas nesse processo.
+
+\subsection{Selection Sort}
+
+A ideia do \textbf{Selection Sort} é bastante intuitiva: a cada passo, encontramos o menor elemento do trecho ainda não ordenado e o colocamos na posição correta. Assim, construímos a sequência ordenada da esquerda para a direita, um elemento por vez.
+
+\begin{lstlisting}[language=C++]
+void selectionSort(int v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIdx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (v[j] < v[minIdx]) {
+                minIdx = j;
+            }
+        }
+        // troca v[i] com o menor elemento encontrado
+        int temp = v[i];
+        v[i] = v[minIdx];
+        v[minIdx] = temp;
+    }
+}
+\end{lstlisting}
+
+Para cada posição \texttt{i}, percorremos todos os elementos à sua direita em busca do menor. Ao final de cada iteração do loop externo, a posição \texttt{i} já contém o valor correto.
+
+\subsection{Bubble Sort}
+
+O \textbf{Bubble Sort} funciona de forma diferente: ele percorre o vetor repetidamente, comparando pares de elementos adjacentes e trocando-os de lugar caso estejam na ordem errada. A cada passagem, o maior elemento ainda fora do lugar ``borbulha'' até sua posição correta no final do vetor.
+
+\begin{lstlisting}[language=C++]
+void bubbleSort(int v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (v[j] > v[j + 1]) {
+                int temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+Note que a cada iteração do loop externo, o maior elemento restante já está em sua posição final, por isso o loop interno vai até \texttt{n - 1 - i}.
+
+\subsection{Insertion Sort}
+
+O \textbf{Insertion Sort} simula a forma como muitas pessoas organizam cartas de baralho na mão: pegamos um elemento por vez e o inserimos na posição correta em relação aos elementos já ordenados à sua esquerda.
+
+\begin{lstlisting}[language=C++]
+void insertionSort(int v[], int n) {
+    for (int i = 1; i < n; i++) {
+        int chave = v[i];
+        int j = i - 1;
+        while (j >= 0 && v[j] > chave) {
+            v[j + 1] = v[j];
+            j--;
+        }
+        v[j + 1] = chave;
+    }
+}
+\end{lstlisting}
+
+Para cada elemento \texttt{v[i]}, deslocamos para a direita todos os elementos maiores que ele (que já estão ordenados) até encontrar a posição onde ele deve ser inserido.
+
+%============================================================================================================================================
+
+\section{Introdução à Complexidade de Algoritmos}
+
+Os três algoritmos que vimos funcionam corretamente. Mas será que são igualmente \textbf{eficientes}? Para responder a essa pergunta de forma rigorosa, precisamos de uma maneira de medir e comparar o desempenho de algoritmos. É aí que entra o conceito de \textbf{complexidade de algoritmos}.
+
+\subsection{A Notação Big-O}
+
+A complexidade de um algoritmo nos diz como o seu tempo de execução cresce em função do tamanho da entrada $n$. Para expressá-la, utilizamos a \textbf{notação Big-O}, que descreve o comportamento do algoritmo no \textbf{pior caso} e ignora constantes e termos de menor ordem, focando no que realmente importa quando $n$ é grande.
+
+Algumas complexidades comuns, da mais eficiente para a menos eficiente:
+
+\begin{itemize}
+    \item $O(1)$: \textbf{constante}. O tempo de execução não depende de $n$. e.g.: acessar um elemento de um vetor pelo índice.
+    \item $O(\log n)$: \textbf{logarítmica}. Cresce muito lentamente. e.g.: busca binária.
+    \item $O(n)$: \textbf{linear}. Cresce proporcionalmente a $n$. e.g.: percorrer um vetor uma vez.
+    \item $O(n \log n)$: \textbf{linearítmica}. Muito eficiente para ordenação. e.g.: Merge Sort.
+    \item $O(n^2)$: \textbf{quadrática}. Começa a ser lenta para entradas grandes. e.g.: Selection Sort, Bubble Sort, Insertion Sort.
+    \item $O(2^n)$: \textbf{exponencial}. Impraticável para $n$ relativamente pequeno.
+\end{itemize}
+
+\subsection{Analisando os Algoritmos Básicos}
+
+Observe que todos os três algoritmos apresentados anteriormente possuem dois \texttt{for}s (ou equivalentes) aninhados, cada um percorrendo até $n$ elementos. Isso significa que, no pior caso, realizam aproximadamente $n \times n = n^2$ operações. Portanto, Selection Sort, Bubble Sort e Insertion Sort são todos $O(n^2)$.
+
+Para ter uma ideia concreta do que isso significa: se $n = 1000$, realizamos cerca de $10^6$ operações. Se $n = 10000$, já são $10^8$ operações. Esse crescimento quadrático se torna um problema muito rapidamente.
+
+%============================================================================================================================================
+
+\section{Complexidade e o Tempo de Execução em Competições}
+
+Em competições de programação, cada problema possui um \textbf{limite de tempo de execução} — tipicamente entre 1 e 3 segundos. Como regra geral, um computador moderno consegue realizar aproximadamente $10^8$ operações simples por segundo. Com esse número em mente, podemos estimar se uma solução vai passar dentro do tempo ou não.
+
+Veja a tabela abaixo para diferentes tamanhos de entrada $n$:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Tamanho de $n$} & \textbf{Complexidade} & \textbf{Operações aproximadas} \\
+\hline
+$10^6$ & $O(n)$ & $10^6$ \checkmark \\
+$10^6$ & $O(n \log n)$ & $\approx 2 \times 10^7$ \checkmark \\
+$10^4$ & $O(n^2)$ & $10^8$ \checkmark \\
+$10^5$ & $O(n^2)$ & $10^{10}$ \texttimes \\
+$10^6$ & $O(n^2)$ & $10^{12}$ \texttimes \\
+\hline
+\end{tabular}
+\end{center}
+
+Perceba que, para $n = 10^5$ — um tamanho de entrada bastante comum em problemas de competição — um algoritmo $O(n^2)$ já ultrapassa com folga o limite de operações aceitável. Isso significa que implementar um Selection Sort ou Bubble Sort nesses casos resultará em \textbf{Time Limit Exceeded (TLE)}: o veredicto mais frustrante para um competidor, pois indica que sua solução está correta, mas lenta demais.
+
+Portanto, escolher o algoritmo certo não é detalhe: é parte fundamental da solução. E é por isso que precisamos de algoritmos de ordenação mais eficientes, com complexidade $O(n \log n)$.
+
+%============================================================================================================================================
+
+\section{Dividir para Conquistar}
+
+Antes de apresentar um algoritmo de ordenação mais eficiente, precisamos entender a estratégia por trás dele: o paradigma \textbf{Dividir para Conquistar} (\textbf{Divide and Conquer}).
+
+A ideia central é simples e poderosa:
+\begin{enumerate}
+    \item \textbf{Dividir}: quebre o problema em subproblemas menores do mesmo tipo.
+    \item \textbf{Conquistar}: resolva cada subproblema recursivamente.
+    \item \textbf{Combinar}: una as soluções dos subproblemas para obter a solução do problema original.
+\end{enumerate}
+
+A recursividade, que vimos no capítulo anterior, é a ferramenta natural para implementar esse paradigma. A cada chamada recursiva, o problema fica menor, até chegarmos a um caso base simples o suficiente para ser resolvido diretamente.
+
+Essa estratégia é incrivelmente versátil e aparece em diversos algoritmos clássicos além da ordenação, como busca binária, multiplicação de matrizes e algoritmos em grafos. Dominar o Dividir para Conquistar é dar um salto significativo na sua capacidade de resolver problemas complexos.
+
+%============================================================================================================================================
+
+\section{Merge Sort}
+
+O \textbf{Merge Sort} é um algoritmo de ordenação que aplica diretamente o paradigma Dividir para Conquistar. Sua lógica é a seguinte:
+
+\begin{enumerate}
+    \item \textbf{Dividir}: divida o vetor ao meio, obtendo dois subvetores.
+    \item \textbf{Conquistar}: ordene cada metade recursivamente com o próprio Merge Sort.
+    \item \textbf{Combinar}: una (\textbf{merge}) as duas metades já ordenadas em um único vetor ordenado.
+\end{enumerate}
+
+O caso base ocorre quando o subvetor tem tamanho 0 ou 1 — afinal, um vetor com um único elemento já está ordenado por definição.
+
+A etapa mais importante e interessante é a \textbf{combinação}: dados dois vetores já ordenados, como uni-los em um único vetor ordenado de forma eficiente? A resposta é elegante: usamos dois ponteiros, um para cada metade, e a cada passo escolhemos o menor entre os dois elementos apontados, avançando o ponteiro correspondente.
+
+\begin{lstlisting}[language=C++]
+void merge(int v[], int inicio, int meio, int fim) {
+    int n1 = meio - inicio + 1;
+    int n2 = fim - meio;
+
+    int esq[n1], dir[n2];
+
+    for (int i = 0; i < n1; i++)
+        esq[i] = v[inicio + i];
+    for (int j = 0; j < n2; j++)
+        dir[j] = v[meio + 1 + j];
+
+    int i = 0, j = 0, k = inicio;
+
+    while (i < n1 && j < n2) {
+        if (esq[i] <= dir[j]) {
+            v[k] = esq[i];
+            i++;
+        } else {
+            v[k] = dir[j];
+            j++;
+        }
+        k++;
+    }
+
+    // copia os elementos restantes
+    while (i < n1) { v[k] = esq[i]; i++; k++; }
+    while (j < n2) { v[k] = dir[j]; j++; k++; }
+}
+
+void mergeSort(int v[], int inicio, int fim) {
+    if (inicio >= fim) return; // caso base
+
+    int meio = (inicio + fim) / 2;
+    mergeSort(v, inicio, meio);      // conquista a metade esquerda
+    mergeSort(v, meio + 1, fim);     // conquista a metade direita
+    merge(v, inicio, meio, fim);     // combina as duas metades
+}
+\end{lstlisting}
+
+Para ordenar um vetor \texttt{v} de tamanho \texttt{n}, basta chamar:
+
+\begin{lstlisting}[language=C++]
+mergeSort(v, 0, n - 1);
+\end{lstlisting}
+
+\subsection{Por que o Merge Sort é $O(n \log n)$?}
+
+Podemos entender a complexidade do Merge Sort de forma intuitiva. A cada nível de recursão, dividimos o problema ao meio — e como vimos ao estudar recursividade, dividir repetidamente um problema ao meio produz $\log_2 n$ níveis. Em cada nível, a etapa de combinação percorre todos os $n$ elementos no total. Logo, temos $\log n$ níveis, cada um custando $O(n)$ trabalho, resultando em $O(n \log n)$ no total.
+
+Essa é uma melhora dramática em relação ao $O(n^2)$ dos algoritmos básicos. Para $n = 10^6$, enquanto o Selection Sort realizaria $10^{12}$ operações, o Merge Sort realiza apenas cerca de $2 \times 10^7$ — uma diferença de mais de 50.000 vezes.
+
+\subsection{Usando a Ordenação da STL}
+
+Na prática, em competições de programação em C++, raramente implementamos o Merge Sort manualmente. A biblioteca padrão do C++ (STL) oferece a função \texttt{sort}, que é altamente otimizada e possui complexidade $O(n \log n)$:
+
+\begin{lstlisting}[language=C++]
+#include <algorithm>
+
+int v[] = {5, 2, 8, 1, 9, 3};
+int n = 6;
+
+sort(v, v + n); // ordena em ordem crescente
+
+// Para vetores (vector<int>):
+// sort(vec.begin(), vec.end());
+\end{lstlisting}
+
+Conhecer o Merge Sort e entender sua lógica, no entanto, continua sendo fundamental: o paradigma Dividir para Conquistar que ele exemplifica reaparecerá em muitos outros problemas ao longo da sua jornada na programação competitiva.
+
+
+\end{document}

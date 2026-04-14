@@ -1,0 +1,15 @@
+\babel@toc {portuguese}{}\relax 
+\contentsline {section}{\numberline {1}Introdução ao Capítulo}{3}{section.1}%
+\contentsline {section}{\numberline {2}Motivação: Por que Ordenar?}{3}{section.2}%
+\contentsline {section}{\numberline {3}Algoritmos Básicos de Ordenação}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Selection Sort}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Bubble Sort}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Insertion Sort}{4}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Introdução à Complexidade de Algoritmos}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}A Notação Big-O}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Analisando os Algoritmos Básicos}{5}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Complexidade e o Tempo de Execução em Competições}{5}{section.5}%
+\contentsline {section}{\numberline {6}Dividir para Conquistar}{6}{section.6}%
+\contentsline {section}{\numberline {7}Merge Sort}{6}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Por que o Merge Sort é $O(n \log n)$?}{8}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Usando a Ordenação da STL}{8}{subsection.7.2}%
